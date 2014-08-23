@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UserTableModelStoreContainer" CdmEntityContainer="UserTable">
+    <EntitySetMapping Name="Tables">
+      <EntityTypeMapping TypeName="UserTableModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+          <ScalarProperty Name="PrimaryContactName" ColumnName="PrimaryContactName" />
+          <ScalarProperty Name="PrimaryEmailAddress" ColumnName="PrimaryEmailAddress" />
+          <ScalarProperty Name="PrimaryPhone" ColumnName="PrimaryPhone" />
+          <ScalarProperty Name="SecondaryContactName" ColumnName="SecondaryContactName" />
+          <ScalarProperty Name="SecondaryEmailAddress" ColumnName="SecondaryEmailAddress" />
+          <ScalarProperty Name="SecondaryPhone" ColumnName="SecondaryPhone" />
+          <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

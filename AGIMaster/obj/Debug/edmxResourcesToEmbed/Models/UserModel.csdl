@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UserTableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryEmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryEmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="UserTable" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tables" EntityType="Self.Table" />
+  </EntityContainer>
+</Schema>

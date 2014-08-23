@@ -1,0 +1,75 @@
+﻿@model AGIMaster.Models.Table
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+@using (Html.BeginForm())
+{
+    //<fieldset>
+    <legend>Registration Form</legend>
+    <ol>
+        <li>
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.Username)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.CompanyName)
+            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.CompanyName)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.CompanyAddress)
+            @Html.TextBoxFor(m => m.CompanyAddress, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.CompanyAddress)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.PrimaryContactName)
+            @Html.TextBoxFor(m => m.PrimaryContactName, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.PrimaryContactName)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.PrimaryEmailAddress)
+            @Html.TextBoxFor(m => m.PrimaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.PrimaryEmailAddress)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.PrimaryPhone)
+            @Html.TextBoxFor(m => m.PrimaryPhone, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.PrimaryPhone)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.SecondaryContactName)
+            @Html.TextBoxFor(m => m.SecondaryContactName, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.SecondaryContactName)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.SecondaryEmailAddress)
+            @Html.TextBoxFor(m => m.SecondaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.SecondaryEmailAddress)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.SecondaryPhone)
+            @Html.TextBoxFor(m => m.SecondaryPhone, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.SecondaryPhone)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ShippingAddress)
+            @Html.TextBoxFor(m => m.ShippingAddress, new { @class = "form-control", @style = "width:20%" })
+        </li>
+    </ol>
+    <input class="btn btn-primary btn-large" type="submit" value="Register" />
+    //</fieldset>
+}

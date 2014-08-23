@@ -1,4 +1,0 @@
-AGI
-===
-
-AGI Project 
