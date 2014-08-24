@@ -7,69 +7,59 @@
 
 @using (Html.BeginForm())
 {
-    //<fieldset>
-    <legend>Registration Form</legend>
-    <ol>
-        <li>
-            @Html.LabelFor(m => m.Username)
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.Username)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.Password)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.ConfirmPassword)
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.ConfirmPassword)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.CompanyName)
-            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.CompanyName)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.CompanyAddress)
-            @Html.TextBoxFor(m => m.CompanyAddress, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.CompanyAddress)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.PrimaryContactName)
-            @Html.TextBoxFor(m => m.PrimaryContactName, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.PrimaryContactName)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.PrimaryEmailAddress)
-            @Html.TextBoxFor(m => m.PrimaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.PrimaryEmailAddress)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.PrimaryPhone)
-            @Html.TextBoxFor(m => m.PrimaryPhone, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.PrimaryPhone)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.SecondaryContactName)
-            @Html.TextBoxFor(m => m.SecondaryContactName, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.SecondaryContactName)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.SecondaryEmailAddress)
-            @Html.TextBoxFor(m => m.SecondaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.SecondaryEmailAddress)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.SecondaryPhone)
-            @Html.TextBoxFor(m => m.SecondaryPhone, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.SecondaryPhone)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.ShippingAddress)
-            @Html.TextBoxFor(m => m.ShippingAddress, new { @class = "form-control", @style = "width:20%" })
-        </li>
-    </ol>
-    <input class="btn btn-primary btn-large" type="submit" value="Register" />
-    //</fieldset>
+    
+    <div class="jumbotron">
+      <div class="container">
+          <h2 class="text-primary" style="margin-bottom:2%">Create New Account</h2>
+         
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @style = "width:20%" })
+                @Html.ValidationMessageFor(m => m.Username)
+           
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "width:20%" })
+                @Html.ValidationMessageFor(m => m.Password)
+           
+                <h5><b>Confirm Password</b></h5>
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @style = "width:20%" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            
+                  <h5><b>Company Name</b></h5>
+                  @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @style = "width:20%" })
+                  @Html.ValidationMessageFor(m => m.CompanyName)
+
+                  <h5><b>Company Address</b></h5>
+                  @Html.TextBoxFor(m => m.CompanyAddress, new { @class = "form-control", @style = "width:40%" })
+                  @Html.ValidationMessageFor(m => m.CompanyAddress)
+
+                  <h5><b>Primary Contact name</b></h5>
+                  @Html.TextBoxFor(m => m.PrimaryContactName, new { @class = "form-control", @style = "width:20%" })
+                  @Html.ValidationMessageFor(m => m.PrimaryContactName)
+
+                  <h5><b>Primary Contact Email</b></h5>
+                  @Html.TextBoxFor(m => m.PrimaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
+                  @Html.ValidationMessageFor(m => m.PrimaryEmailAddress)
+
+                  <h5><b>Primary Contact Phone</b></h5>
+                  @Html.TextBoxFor(m => m.PrimaryPhone, new { @class = "form-control", @style = "width:20%" })
+                  @Html.ValidationMessageFor(m => m.PrimaryPhone)
+
+                  <h5><b>Secondary Contact Name</b></h5>
+                  @Html.TextBoxFor(m => m.SecondaryContactName, new { @class = "form-control", @style = "width:20%" })
+                  @Html.ValidationMessageFor(m => m.SecondaryContactName)
+
+                  <h5><b>Secondary Contact Email</b></h5>
+                  @Html.TextBoxFor(m => m.SecondaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
+                  @Html.ValidationMessageFor(m => m.SecondaryEmailAddress)
+
+                  <h5><b>Secondary Contact Phone</b></h5>
+                  @Html.TextBoxFor(m => m.SecondaryPhone, new { @class = "form-control", @style = "width:20%" })
+                  @Html.ValidationMessageFor(m => m.SecondaryPhone)
+
+                  <h5><b>Shipping address(If different from Company Address)</b></h5>
+                  @Html.TextBoxFor(m => m.ShippingAddress, new { @class = "form-control", @style = "width:40%" })
+
+    <input class="btn btn-primary btn-large" type="submit" value="Register" style="margin-top: 2%"/>  
+    </div>
+    </div>
 }
