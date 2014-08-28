@@ -185,14 +185,39 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderProduct.cs">
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Table.cs">
-      <DependentUpon>UserModel.tt</DependentUpon>
+      <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -302,6 +327,23 @@
       <DependentUpon>UserModel.edmx</DependentUpon>
       <LastGenOutput>UserModel.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="Models\Orders.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Orders.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Orders.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Orders.edmx.diagram">
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Orders.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -357,6 +399,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Orders\Orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

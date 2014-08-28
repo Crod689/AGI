@@ -11,37 +11,16 @@ namespace AGIMaster.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Table
     {
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Please provide username", AllowEmptyStrings = false)]
         public string Username { get; set; }
-
-        [Required(ErrorMessage = "Please provide Password", AllowEmptyStrings = false)]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
-        [StringLength(50, MinimumLength = 8, ErrorMessage = "Password must be 8 char long.")]
         public string Password { get; set; }
-
-        [Compare("Password", ErrorMessage = "Confirm password dose not match.")]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
-        public string ConfirmPassword { get; set; }
-
-        [Required(ErrorMessage = "Please provide Company Name", AllowEmptyStrings = false)]
         public string CompanyName { get; set; }
-
-        [Required(ErrorMessage = "Please provide Company Address", AllowEmptyStrings = false)]
         public string CompanyAddress { get; set; }
-
-        [Required(ErrorMessage = "Please provide Primany Contact Name", AllowEmptyStrings = false)]
         public string PrimaryContactName { get; set; }
-
-        [Required(ErrorMessage = "Please provide Primany email address", AllowEmptyStrings = false)]
         public string PrimaryEmailAddress { get; set; }
-
-        [Required(ErrorMessage = "Please provide Primany Phone Number", AllowEmptyStrings = false)]
         public string PrimaryPhone { get; set; }
         public string SecondaryContactName { get; set; }
         public string SecondaryEmailAddress { get; set; }
