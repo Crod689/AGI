@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UserTableModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UserTableModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="OrderProduct">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Order_Id" Type="int" Nullable="false" />
           <Property Name="Product_Id" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -18,17 +18,18 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Comapny" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Pending" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
           <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Table">
@@ -49,7 +50,7 @@
           <Property Name="ShippingAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="CreationDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK__OrderProd__Order__4AB81AF0">
+        <Association Name="FK__OrderProd__Order__70DDC3D8">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -61,7 +62,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__Produ__4BAC3F29">
+        <Association Name="FK__OrderProd__Produ__619B8048">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -78,17 +79,16 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__OrderProd__Order__4AB81AF0" Association="Self.FK__OrderProd__Order__4AB81AF0">
+          <AssociationSet Name="FK__OrderProd__Order__70DDC3D8" Association="Self.FK__OrderProd__Order__70DDC3D8">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__Produ__4BAC3F29" Association="Self.FK__OrderProd__Produ__4BAC3F29">
+          <AssociationSet Name="FK__OrderProd__Produ__619B8048" Association="Self.FK__OrderProd__Produ__619B8048">
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UserTableModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -111,6 +111,7 @@
           <Property Name="Comapny" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Pending" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Order__4AB81AF0" FromRole="Orders" ToRole="OrderProduct" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" Precision="3" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -118,7 +119,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Produ__4BAC3F29" FromRole="Products" ToRole="OrderProduct" />
         </EntityType>
@@ -197,6 +198,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="UserTableModel1.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Comapny" ColumnName="Comapny" />
                 <ScalarProperty Name="Pending" ColumnName="Pending" />

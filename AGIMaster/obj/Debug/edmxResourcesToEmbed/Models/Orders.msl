@@ -14,6 +14,7 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="UserTableModel1.Order">
         <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Comapny" ColumnName="Comapny" />
           <ScalarProperty Name="Pending" ColumnName="Pending" />

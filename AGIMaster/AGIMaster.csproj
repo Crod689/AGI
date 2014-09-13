@@ -400,6 +400,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Orders\Orders.cshtml" />
+    <Content Include="Views\Orders\MakeOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
