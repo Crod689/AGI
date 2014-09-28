@@ -6,45 +6,75 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         <link rel="stylesheet" href="~/Content/Bootstrap/css/bootstrap.css">
+        <link href="~/Content/Roller/jquery-ui.css" rel="stylesheet" />
         @Scripts.Render("~/bundles/jquery")
         @*@Styles.Render("~/Content/css")*@
         @Scripts.Render("~/bundles/modernizr")
+        <style type="text/css">
+            body{
+                margin: 0;
+                padding: 0;
+                padding-top: 10px;
+                text-align: center;
+            } 
+            #centered{
+                width: 800px;
+                text-align: left;
+                border: 0px;
+                padding: 0;
+                margin: 0 auto;
+            }
+        </style>
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" rel="home" href="#" title="Buy Sell Rent Everyting">
+                            <img style="max-width:100px; margin-top: -7px;" src="~/Content/Roller/images/AGI_Logo.png">
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/Orders/Orders">Orders</a></li>
+                            <li><a href="#">Account</a></li>
                         </ul>
-                    </nav>
-                </div>
-            </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @*<section id="login">*@
+                                    @Html.Partial("_LoginPartial")
+                                @*</section>*@
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+               
         </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
+        <div id="centered">
+            <div id="body">
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix">
+                    @RenderBody()
+                </section>
+            </div>
         </div>
         <footer>
             <div class="content-wrapper">
-                <div class="float-left">
-                    <p></p>
+                <div class="text-center">
+                    <p>Powerd By Cerberus</p>
                 </div>
             </div>
         </footer>
-
-       
         @RenderSection("scripts", required: false)
     </body>
 </html>
