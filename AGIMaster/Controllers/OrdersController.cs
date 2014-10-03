@@ -12,7 +12,7 @@ namespace AGIMaster.Controllers
     {
         //
         // GET: /Orders/
-
+        [Authorize]
         public ActionResult Orders(AGIMaster.Models.OrderProduct u)
         { 
             //return View();
@@ -21,12 +21,21 @@ namespace AGIMaster.Controllers
             {
                 using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
                 {
-                    IEnumerable listOfNames = db.Orders.ToList();
-                    return View(listOfNames);
+                    var company = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name).CompanyName;
+                    if (company != null){
+                        IEnumerable listOfNames = db.Orders.Where(x => x.Comapny == company).ToList();
+                        return View(listOfNames);
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                    
                 }
             }
             return View();
         }
+        [Authorize]
         public ActionResult MakeOrder()
         {
             ViewBag.Message = "Make an Order";
@@ -40,12 +49,14 @@ namespace AGIMaster.Controllers
             }
             return View();
         }
+        [Authorize]
         [HttpPost]
         public void CreateOrder(string products, string quantities)
         {
             using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
-            {
-                var newOrder = new Order { Comapny = "Cerberus" };
+            {   
+                var company = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name).CompanyName;
+                var newOrder = new Order { Comapny = company, Pending = true };
                 var productArray = products.Split(',');
                 var quantityArray = quantities.Split(',');
                 db.Orders.Add(newOrder);

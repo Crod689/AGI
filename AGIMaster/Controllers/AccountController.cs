@@ -40,10 +40,11 @@ namespace AGIMaster.Controllers
                     string username = model.UserName;
                     string password = model.Password;
 
-                    bool userValid = db.Tables.Any(user => (user.Username == username && user.Password == password));
+                    var userValid = db.Tables.FirstOrDefault(user => (user.Username == username && user.Password == password));
 
-                    if(userValid)
+                    if(userValid != null)
                     {
+
                         FormsAuthentication.SetAuthCookie(username, false);
                         if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                         {
@@ -66,14 +67,12 @@ namespace AGIMaster.Controllers
         //
         // POST: /Account/LogOff
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult LogOff()
-        //{
-        //    WebSecurity.Logout();
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            return RedirectToAction("Index", "Home");
+        }
 
         ////
         //// GET: /Account/Register
