@@ -9,22 +9,23 @@
 <table id="orders" class="table">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Name</th>
-            <th>Price</th>
+            <th>Spesification</th>
+            <th>More Info</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var product in Model.OrderBy(x => x.Id))
         {
-            <tr id="@product.Id" data-name="@product.Name" data-price="@product.Price"><td>@product.Name</td><td>@product.Description</td><td>@product.Price</td></tr>
+            <tr id="@product.Id" data-name="@product.Name" data-price="@product.Price"><td>@product.Name</td><td>@product.Description</td><td><span class="glyphicon glyphicon-asterisk" ></span></td></tr>
+           
         }
     </tbody>
 </table>
 <div id="form">
     <h2>Click the items you want.</h2>
     <br />
-    <table id="items">
+    <table id="items" class="table">
         <thead>
             <tr>
                 <th>
@@ -33,18 +34,22 @@
                 <th>
                     Quantity
                 </th>
+                <th>
+                    Delete
+                </th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
-    <h3>Total: $<span id="price"></span></h3>
+    @*<h3>Total: $<span id="price"></span></h3>*@
     <button type="button" id="formSubmit">Submit</button>
 </div>
 <script type="text/javascript">
     var inTable = new Array();
     var dupFlag = false;
     var totalPrice = 0.0;
-    $(document).on("ready", function () {     
+    var descriptions = new Array();
+    $(document).on("ready", function () {
         $("#orders tbody tr").on("click", function () {
             var id = $(this).attr("id");
             if (inTable.length > 0) {
@@ -64,7 +69,7 @@
             } else {
                 inTable[inTable.length] = id;
                // console.log("click");
-                var newRow = "<tr id=\"" + id + "\"><td>" + $(this).data("name") + "</td><td><input type=\"number\" value=\"1\" /></td><td><span id=\""+id+"\">Delete</span></td></tr>";
+                var newRow = "<tr id=\"" + id + "\"><td>" + $(this).data("name") + "</td><td><input id='spinner' class=\"ui-spinner-input\" type=\"number\" value=\"1\" min=\"1\" max=\"99\"/></td><td><span id=\"" + id + "\" class=\"glyphicon glyphicon-trash\"></span></td></tr>";
                // console.log(newRow);
                 $("table#items tbody").append(newRow);
                 totalPrice += parseFloat($(this).data("price")) * parseInt($(this).find("td input").val());
@@ -72,6 +77,10 @@
             }
             console.log(totalPrice);
             $("span#price").text(totalPrice);
+
+        });
+        $("#orders tbody tr td").on("hover", "span", function () {
+            $(this).closest("tr").attr("id")
 
         });
         $("div#form button#formSubmit").on("click", function () {
@@ -112,5 +121,6 @@
             products = "";
             quantities = "";
         });
+        $("#spinner").spinner();
     });
 </script>
