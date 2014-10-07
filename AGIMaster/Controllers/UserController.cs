@@ -24,9 +24,15 @@ namespace AGIMaster.Controllers
                 {
                     db.Tables.Add(u);
                     db.SaveChanges();
+
+                    return RedirectToAction("Login","Account");
                 }
             }
-            return View(u);
+            else
+            {
+                return View(u);
+            }
+
         }
     }
 }

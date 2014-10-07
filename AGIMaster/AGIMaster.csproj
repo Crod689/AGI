@@ -234,6 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ValidatePasswordLength.cs" />
     <Compile Include="Models\_ValidateRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
