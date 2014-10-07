@@ -3,46 +3,59 @@
     ViewBag.Title = "MakeOrder";
 }
 
-<h2>@ViewBag.Message</h2>
 
-<h3> This is where you can make an Order</h3>
-<table id="orders" class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Spesification</th>
-            <th>More Info</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.OrderBy(x => x.Id))
-        {
-            <tr id="@product.Id" data-name="@product.Name" data-price="@product.Price"><td>@product.Name</td><td>@product.Description</td><td><span class="glyphicon glyphicon-asterisk" ></span></td></tr>
-           
-        }
-    </tbody>
-</table>
-<div id="form">
-    <h2>Click the items you want.</h2>
-    <br />
-    <table id="items" class="table">
+<div class="row">
+    <div class="col-md-1"></div>
+<div class="col-md-7">
+    <h2>@ViewBag.Message</h2>
+    @*<h3> This is where you can make an Order</h3>*@
+    <table id="orders" class="table-striped table-bordered">
         <thead>
             <tr>
-                <th>
-                    Product
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Delete
-                </th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Spesification</th>
+                <th>More Info</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+            @foreach (var product in Model.OrderBy(x => x.Id))
+            {
+                <tr id="@product.Id" data-name="@product.Name" data-price="@product.Price">
+                    <td width="20%" height="125px"><img src="~/Images/no-image.jpg" height="100" width="100"/></td>
+                    <td width="20%" height="25%">@product.Name</td>
+                    <td width="40%" height="25%">@product.Description</td>
+                    <td width="20%" height="25%"><span class="glyphicon glyphicon-asterisk"></span></td>
+                </tr>
+
+            }
+        </tbody>
     </table>
-    @*<h3>Total: $<span id="price"></span></h3>*@
-    <button type="button" id="formSubmit">Submit</button>
+</div>
+    <div id="form" class="col-md-4">
+        <div style="position:fixed">
+            <h2>Click the items you want.</h2>
+            <table id="items" class="table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th width="80">
+                            Product
+                        </th>
+                        <th width="80">
+                            Quantity
+                        </th>
+                        <th width="80">
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <br />
+            @*<h3>Total: $<span id="price"></span></h3>*@
+            <button type="button" id="formSubmit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     var inTable = new Array();

@@ -19,17 +19,17 @@
         <script src="~/Content/Roller/jquery-ui.js"></script>
         <style type="text/css">
             body{
-                margin: 0;
+/*                margin: 0;
                 padding: 0;
                 padding-top: 10px;
-                text-align: center;
+                text-align: center;*/
             } 
-            #centered{
+            #centered{/*
                 width: 800px;
                 text-align: left;
                 border: 0px;
                 padding: 0;
-                margin: 0 auto;
+                margin: 0 auto;*/
             }
         </style>
     </head>
@@ -70,9 +70,9 @@
         <div id="centered">
             <div id="body">
                 @RenderSection("featured", required: false)
-                <section class="content-wrapper main-content clear-fix">
+                @*<section class="content-wrapper main-content clear-fix">*@
                     @RenderBody()
-                </section>
+                @*</section>*@
             </div>
         </div>
         <footer>
