@@ -10,6 +10,7 @@ namespace AGIMaster.Controllers
 {
     public class OrdersController : Controller
     {
+        private UserTableEntities1 db = new UserTableEntities1(); 
         //
         // GET: /Orders/
         [Authorize]
@@ -68,6 +69,19 @@ namespace AGIMaster.Controllers
                     db.SaveChanges();
                 }
             }
+        }
+        public JsonResult ViewOrder(int id)
+        {
+            //using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
+            //{
+                var list = db.OrderProducts.Where(x => x.Order_Id == id).ToList();
+                Dictionary<string, int> map=new Dictionary<string,int>();
+                foreach (var item in list)
+                {
+                    map.Add(item.Product.Name, item.Quantity);
+                }
+                return Json(map,JsonRequestBehavior.AllowGet);
+           // }
         }
      
     }

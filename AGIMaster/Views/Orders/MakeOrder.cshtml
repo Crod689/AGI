@@ -49,11 +49,11 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody><tr id="EMPTY"><td>No Items in Cart</td><td>0</td><td>:(</td></tr></tbody>
             </table>
             <br />
             @*<h3>Total: $<span id="price"></span></h3>*@
-            <button type="button" id="formSubmit" class="btn btn-primary">Submit</button>
+            <button type="button" id="formSubmit" class="btn btn-primary hidden">Submit</button>
         </div>
     </div>
 </div>
@@ -62,8 +62,13 @@
     var dupFlag = false;
     var totalPrice = 0.0;
     var descriptions = new Array();
+    var initFlag = false;
     $(document).on("ready", function () {
         $("#orders tbody tr").on("click", function () {
+            if ($("#items tbody tr").attr("id") == "EMPTY") {
+                $("#items tbody").empty();
+                $("button#formSubmit").toggleClass("hidden");
+            }
             var id = $(this).attr("id");
             if (inTable.length > 0) {
                 for (i = 0; i < inTable.length; i++) {
@@ -91,6 +96,16 @@
             console.log(totalPrice);
             $("span#price").text(totalPrice);
 
+        });
+        $("#form div #items tbody").on("click", " tr td span", function () {
+            //console.log($(this).attr("id"));
+            var id = $(this).attr("id");
+            inTable.splice(inTable.indexOf(id), 1);
+            $(this).closest("tr").remove();
+            $("#items tbody:empty").append("<tr id='EMPTY'><td>No Items in Cart</td><td>0</td><td>:(</td></tr>");
+            if ($("#items tbody tr").attr("id") == "EMPTY") {
+                $("#formSubmit").toggleClass("hidden");
+            }
         });
         $("#orders tbody tr td").on("hover", "span", function () {
             $(this).closest("tr").attr("id")
