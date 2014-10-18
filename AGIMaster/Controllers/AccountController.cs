@@ -74,6 +74,11 @@ namespace AGIMaster.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
         ////
         //// GET: /Account/Register
 
