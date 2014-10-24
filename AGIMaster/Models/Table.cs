@@ -54,5 +54,6 @@ namespace AGIMaster.Models
         [Required]
         public string ShippingAddress { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
+        public string Privlage { get; set; }
     }
 }

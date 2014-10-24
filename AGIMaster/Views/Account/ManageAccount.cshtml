@@ -1,0 +1,65 @@
+﻿@model AGIMaster.Models.Table
+@{
+    ViewBag.Title = "ManageAccount";
+}
+
+<h2>ManageAccount</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="text-primary" style="margin-bottom:2%">Edit Account details</h2>
+
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.Username)
+
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.Password)
+
+            <h5><b>Confirm Password</b></h5>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+
+            <h5><b>Company Name</b></h5>
+            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.CompanyName)
+
+            <h5><b>Company Address</b></h5>
+            @Html.TextBoxFor(m => m.CompanyAddress, new { @class = "form-control", @style = "width:40%" })
+            @Html.ValidationMessageFor(m => m.CompanyAddress)
+
+            <h5><b>Primary Contact name</b></h5>
+            @Html.TextBoxFor(m => m.PrimaryContactName, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.PrimaryContactName)
+
+            <h5><b>Primary Contact Email</b></h5>
+            @Html.TextBoxFor(m => m.PrimaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.PrimaryEmailAddress)
+
+            <h5><b>Primary Contact Phone</b></h5>
+            @Html.TextBoxFor(m => m.PrimaryPhone, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.PrimaryPhone)
+
+            <h5><b>Secondary Contact Name</b></h5>
+            @Html.TextBoxFor(m => m.SecondaryContactName, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.SecondaryContactName)
+
+            <h5><b>Secondary Contact Email</b></h5>
+            @Html.TextBoxFor(m => m.SecondaryEmailAddress, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.SecondaryEmailAddress)
+
+            <h5><b>Secondary Contact Phone</b></h5>
+            @Html.TextBoxFor(m => m.SecondaryPhone, new { @class = "form-control", @style = "width:20%" })
+            @Html.ValidationMessageFor(m => m.SecondaryPhone)
+
+            <h5><b>Shipping address(If different from Company Address)</b></h5>
+            @Html.TextBoxFor(m => m.ShippingAddress, new { @class = "form-control", @style = "width:40%" })
+
+            <input class="btn btn-primary btn-large" type="submit" value="Register" style="margin-top: 2%" />
+        </div>
+    </div>
+}

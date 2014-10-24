@@ -2,33 +2,91 @@
 @{
     ViewBag.Title = "Orders";
 }
-<h2>Order</h2>
-<table><tbody><tr><td><span id="MO">@Html.ActionLink("Make an Order", "MakeOrder", "Orders") </span></td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><span id="VO">View Orders</span></td></tr></tbody></table>
-<table id="orders" class="table" hidden>
-    <thead>
-        <th>ID</th>
-        <th>Company</th>
-        <th>Pending</th>
-        <th>Date</th>
-    </thead>
-    <tbody>
-        @foreach (var order in Model.OrderBy(x => x.Id))
-        {
-            <tr>
-                <td>@order.Id</td>
-                <td>@order.Comapny</td>
-                <td>@order.Pending</td>
-                <td>
-                    @order.DateCreated
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+        @*<table><tbody><tr><td><span id="MO">@Html.ActionLink("Make an Order", "MakeOrder", "Orders") </span></td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><span id="VO">View Orders</span></td></tr></tbody></table>*@
+
+        <h3>Orders Made</h3>
+        <table id="orders" class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Company</th>
+                    <th>Pending</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model.OrderBy(x => x.Id))
+                {
+                    <tr id="@order.Id">
+                        <td>@order.Id</td>
+                        <td>@order.Comapny</td>
+                        <td>@order.Pending</td>
+                        <td>
+                            @order.DateCreated
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+       @Html.ActionLink("Make an Order", "MakeOrder", "Orders",null,new { @class = "btn btn-primary"})
+    </div>
+    <div class="col-md-4">
+        <div style="position:fixed">
+            <h3>Products in Order</h3>
+            <table id="products" class="table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th width="150">Product Name</th>
+                        <th width="80">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody><tr id="EMPTY"><td>Click an order to see items</td><td>0</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
+    var initFlag = false;
     $(document).on("ready", function () {
         $("span#VO").on("click", function () {
             $("table#orders").toggle("hidden");
         });
+        $("#orders tbody tr").on("click", function () {
+            var id = $(this).attr("id");
+            $("#orders tbody tr").removeClass("alert-info");
+            $(this).toggleClass("alert-info");
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ViewOrder", "Orders")",
+                dataType: "json",
+                data: {
+                    id:id
+                }
+            })
+            .done(function (data) {
+                var list = data;
+                // console.log(list);
+                Display(list);
+            })
+            .fail(function (xhr) {
+                console.log(xhr.responseText);
+            });
+        });
     });
+    function Display(obj) {
+        var output = '';
+        $("#products tbody").empty();
+        if ($("#products tbody tr").attr("id") == "EMPTY") {
+            $(this).empty();
+        }
+        for (var product in obj) {
+            var newRow = "<tr><td>" + product + "</td><td>"+obj[product]+"</td></tr>";
+            $("table#products tbody").append(newRow);
+            // output += product + ': ' + obj[property] + '\n ';
+        }
+       // console.log(output);
+    }
 </script>

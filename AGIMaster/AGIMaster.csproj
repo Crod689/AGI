@@ -217,7 +217,7 @@
       <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Table.cs">
-      <DependentUpon>Orders.tt</DependentUpon>
+      <DependentUpon>UserModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -435,6 +435,7 @@
     <Content Include="Views\Orders\Orders.cshtml" />
     <Content Include="Views\Orders\MakeOrder.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ManageAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

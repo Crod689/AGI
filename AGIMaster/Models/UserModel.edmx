@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UserTableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UserTableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Table">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,12 +22,12 @@
           <Property Name="SecondaryPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="ShippingAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="CreationDate" Type="datetime" />
+          <Property Name="Privlage" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="UserTableModelStoreContainer">
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UserTableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -48,6 +48,7 @@
           <Property Name="SecondaryPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShippingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="Privlage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="UserTable" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tables" EntityType="Self.Table" />
@@ -61,6 +62,7 @@
           <EntitySetMapping Name="Tables">
             <EntityTypeMapping TypeName="UserTableModel.Table">
               <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Privlage" ColumnName="Privlage" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

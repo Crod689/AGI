@@ -10,6 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using AGIMaster.Filters;
 using AGIMaster.Models;
+using System.Net.Mail;
+using System.Text;
 
 namespace AGIMaster.Controllers
 {
@@ -79,6 +81,52 @@ namespace AGIMaster.Controllers
             return View();
         }
 
+        public ActionResult SendEmail(string email)
+        {
+            try
+            {
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+                client.Timeout = 10000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential("teamchronos2014@gmail.com", "seniordesign");
+
+
+                MailMessage mm = new MailMessage("teamchronos2014@gmail.com", email, "Email from AGI", "Your new password will be put here");
+                mm.BodyEncoding = UTF8Encoding.UTF8;
+                mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                client.Send(mm);
+
+            
+                return RedirectToAction("Index", "Home");
+
+            }
+            catch
+            {
+                return RedirectToAction("ForgotPassword", "Account");
+            }
+
+        }
+
+        [Authorize]
+        public ActionResult ManageAccount()
+        {
+            if (ModelState.IsValid)
+            {
+                using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
+                {
+                    //var currentUser = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name).Id;
+                    AGIMaster.Models.Table userInfo = new AGIMaster.Models.Table();
+                    userInfo = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name);
+                    return View(userInfo);
+                }
+            }
+            return View();
+        }
         ////
         //// GET: /Account/Register
 
