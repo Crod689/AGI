@@ -19,11 +19,13 @@ using System.Data.Entity.Infrastructure;
 namespace AGIMaster.Controllers
 {
     //[Authorize]
-    //[InitializeSimpleMembership]
+    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
         // GET: /Account/Login
+        private UserTableEntities1 bass = new UserTableEntities1();
+        
 
         public ActionResult Login()
         {
@@ -115,7 +117,6 @@ namespace AGIMaster.Controllers
 
         }
 
-        [Authorize]
         public ActionResult ManageAccount()
         {
             if (ModelState.IsValid)
