@@ -17,6 +17,7 @@
     <Property Name="SecondaryPhone" Type="nvarchar" MaxLength="50" />
     <Property Name="ShippingAddress" Type="nvarchar" MaxLength="50" />
     <Property Name="CreationDate" Type="datetime" />
+    <Property Name="Roles" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="UserTableModelStoreContainer">
     <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />

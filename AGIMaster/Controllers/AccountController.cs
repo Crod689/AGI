@@ -12,6 +12,9 @@ using AGIMaster.Filters;
 using AGIMaster.Models;
 using System.Net.Mail;
 using System.Text;
+using System.Data;
+using System.Data.Entity.Validation;
+using System.Data.Entity.Infrastructure;
 
 namespace AGIMaster.Controllers
 {
@@ -126,6 +129,57 @@ namespace AGIMaster.Controllers
                 }
             }
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ManageAccount(AGIMaster.Models.Table EditAccount)
+        {
+                AGIMaster.Models.Table userInfo = new AGIMaster.Models.Table();
+                using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
+                {
+                    userInfo = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name);
+                }
+
+                userInfo.CompanyAddress = EditAccount.CompanyAddress;
+                userInfo.PrimaryContactName = EditAccount.PrimaryContactName;
+                userInfo.PrimaryEmailAddress = EditAccount.PrimaryEmailAddress;
+                userInfo.PrimaryPhone = EditAccount.PrimaryPhone;
+                userInfo.SecondaryContactName = EditAccount.SecondaryContactName;
+                userInfo.SecondaryEmailAddress = EditAccount.SecondaryEmailAddress;
+                userInfo.SecondaryPhone = EditAccount.SecondaryPhone;
+                userInfo.ShippingAddress = EditAccount.ShippingAddress;
+                userInfo.ConfirmPassword = userInfo.Password;
+
+                using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
+                {
+                    
+                    db.Entry(userInfo).State = EntityState.Modified;
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException ex)
+                    {
+                        foreach (DbEntityValidationResult item in ex.EntityValidationErrors)
+                        {
+                            // Get entry
+
+                            DbEntityEntry entry = item.Entry;
+                            string entityTypeName = entry.Entity.GetType().Name;
+
+                            // Display or log error messages
+
+                            foreach (DbValidationError subItem in item.ValidationErrors)
+                            {
+                                string message = string.Format("Error '{0}' occurred in {1} at {2}",
+                                         subItem.ErrorMessage, entityTypeName, subItem.PropertyName);
+                                Console.WriteLine(message);
+                            }
+                        }
+                    }
+                }
+                return View();
         }
         ////
         //// GET: /Account/Register

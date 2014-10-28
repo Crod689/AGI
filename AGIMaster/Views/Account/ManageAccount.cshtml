@@ -13,19 +13,15 @@
             <h2 class="text-primary" style="margin-bottom:2%">Edit Account details</h2>
 
             @Html.LabelFor(m => m.Username)
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @style = "width:20%" })
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @style = "width:20%", disabled = "disabled" })
             @Html.ValidationMessageFor(m => m.Username)
 
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.Password)
-
-            <h5><b>Confirm Password</b></h5>
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @style = "width:20%" })
-            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            @****************TEST************@
+            @Html.HiddenFor(m => m.Password)
+            @Html.HiddenFor(m => m.ConfirmPassword)
 
             <h5><b>Company Name</b></h5>
-            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @style = "width:20%" })
+            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @style = "width:20%", disabled = "disabled" })
             @Html.ValidationMessageFor(m => m.CompanyName)
 
             <h5><b>Company Address</b></h5>
@@ -59,7 +55,7 @@
             <h5><b>Shipping address(If different from Company Address)</b></h5>
             @Html.TextBoxFor(m => m.ShippingAddress, new { @class = "form-control", @style = "width:40%" })
 
-            <input class="btn btn-primary btn-large" type="submit" value="Register" style="margin-top: 2%" />
+            <input class="btn btn-primary btn-large" type="submit" value="Submit" style="margin-top: 2%" />
         </div>
     </div>
 }

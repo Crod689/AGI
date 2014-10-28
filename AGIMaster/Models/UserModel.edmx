@@ -22,7 +22,7 @@
           <Property Name="SecondaryPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="ShippingAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="CreationDate" Type="datetime" />
-          <Property Name="Privlage" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Roles" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="UserTableModelStoreContainer">
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
@@ -48,7 +48,7 @@
           <Property Name="SecondaryPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShippingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <Property Name="Privlage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Roles" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="UserTable" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tables" EntityType="Self.Table" />
@@ -62,7 +62,7 @@
           <EntitySetMapping Name="Tables">
             <EntityTypeMapping TypeName="UserTableModel.Table">
               <MappingFragment StoreEntitySet="Table">
-                <ScalarProperty Name="Privlage" ColumnName="Privlage" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
