@@ -26,12 +26,13 @@ namespace AGIMaster.Controllers
             {
                 using (Models.UserTable db = new Models.UserTable())
                 {
+                    u.Roles = "User";
                     db.Tables.Add(u);
                     db.SaveChanges();
                 }
-                Roles.CreateRole("Admin");
+               // Roles.CreateRole("User");
                 WebSecurity.CreateUserAndAccount(u.Username, u.Password);
-                Roles.AddUserToRole(u.Username, "Admin");
+                Roles.AddUserToRole(u.Username, "User");
                 return RedirectToAction("Login", "Account");
             }
             else
