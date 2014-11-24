@@ -21,7 +21,7 @@ namespace AGIMaster.Models
     
         public int Id { get; set; }
         public string Comapny { get; set; }
-        public bool Pending { get; set; }
+        public string Pending { get; set; }
         public System.DateTime DateCreated { get; set; }
     
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }

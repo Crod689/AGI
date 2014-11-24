@@ -34,6 +34,7 @@
     <EntitySetMapping Name="Tables">
       <EntityTypeMapping TypeName="UserTableModel1.Table">
         <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="Roles" ColumnName="Roles" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />

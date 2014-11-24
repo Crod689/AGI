@@ -15,7 +15,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Comapny" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Pending" Type="bit" Nullable="false" />
+    <Property Name="Pending" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="Products">
@@ -44,6 +44,7 @@
     <Property Name="SecondaryPhone" Type="nvarchar" MaxLength="50" />
     <Property Name="ShippingAddress" Type="nvarchar" MaxLength="50" />
     <Property Name="CreationDate" Type="datetime" />
+    <Property Name="Roles" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK__OrderProd__Order__70DDC3D8">
     <End Role="Orders" Type="Self.Orders" Multiplicity="1" />

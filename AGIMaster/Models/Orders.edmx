@@ -20,7 +20,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Comapny" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Pending" Type="bit" Nullable="false" />
+          <Property Name="Pending" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Products">
@@ -49,6 +49,7 @@
           <Property Name="SecondaryPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="ShippingAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="CreationDate" Type="datetime" />
+          <Property Name="Roles" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK__OrderProd__Order__70DDC3D8">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
@@ -109,7 +110,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Comapny" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Pending" Type="Boolean" Nullable="false" />
+          <Property Name="Pending" Type="String" Nullable="false" />
           <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Order__4AB81AF0" FromRole="Orders" ToRole="OrderProduct" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" Precision="3" />
         </EntityType>
@@ -140,6 +141,7 @@
           <Property Name="SecondaryPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShippingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="Roles" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__OrderProd__Order__4AB81AF0">
           <End Role="Orders" Type="Self.Order" Multiplicity="1" />
@@ -218,6 +220,7 @@
           <EntitySetMapping Name="Tables">
             <EntityTypeMapping TypeName="UserTableModel1.Table">
               <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

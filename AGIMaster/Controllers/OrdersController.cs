@@ -57,7 +57,7 @@ namespace AGIMaster.Controllers
             using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
             {   
                 var company = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name).CompanyName;
-                var newOrder = new Order { Comapny = company, Pending = true };
+                var newOrder = new Order { Comapny = company, Pending = "Pending" };
                 var productArray = products.Split(',');
                 var quantityArray = quantities.Split(',');
                 db.Orders.Add(newOrder);
