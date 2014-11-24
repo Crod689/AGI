@@ -218,7 +218,7 @@
       <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Table.cs">
-      <DependentUpon>UserModel.tt</DependentUpon>
+      <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserModel.Context.cs">
       <AutoGen>True</AutoGen>

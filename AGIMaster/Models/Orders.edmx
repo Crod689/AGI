@@ -110,7 +110,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Comapny" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Pending" Type="String" Nullable="false" />
+          <Property Name="Pending" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Order__4AB81AF0" FromRole="Orders" ToRole="OrderProduct" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" Precision="3" />
         </EntityType>
