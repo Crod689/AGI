@@ -14,14 +14,14 @@
             <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Spesification</th>
+                <th>Specification</th>
                 <th>More Info</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var product in Model.OrderBy(x => x.Id))
             {
-                <tr id="@product.Id" data-name="@product.Name" data-price="@product.Price">
+                <tr id="@product.Id" data-name="@product.Name" data-price="@*@product.Price*@0.0">
                     <td width="20%" height="125px"><img src="~/Images/no-image.jpg" height="100" width="100"/></td>
                     <td width="20%" height="25%">@product.Name</td>
                     <td width="40%" height="25%">@product.Description</td>

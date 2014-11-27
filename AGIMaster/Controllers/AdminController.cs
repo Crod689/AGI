@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace AGIMaster.Controllers
 {
@@ -48,6 +49,19 @@ namespace AGIMaster.Controllers
             }
 
         }
+        public ActionResult Edit(string order)
+        {
+            var id = Convert.ToInt32(order);
+            IEnumerable list = db.OrderProducts.Where(x => x.Order_Id == id).ToList();
+            //Dictionary<string, int> map = new Dictionary<string, int>();
+            //foreach (var item in list)
+            //{
+            //    map.Add(item.Product.Name, item.Quantity);
+            //}
+           // return View(Json(map, JsonRequestBehavior.AllowGet));
+            return View(list);
+
+        }
         [Authorize(Roles="Admin")]
         public void Deny(string orders)
         {
@@ -63,6 +77,15 @@ namespace AGIMaster.Controllers
                 }
                 db.SaveChanges();
             }
+        }
+        [Authorize(Roles="Admin")]
+        public string getProducts()
+        {
+            var productList = from a in db.Products select new { Id=a.Id, Name=a.Name, Description = a.Description};
+           // var productList = db.Products..ToList();
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(productList.ToList());
+            return json;
         }
     }
 }

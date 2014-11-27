@@ -1,0 +1,214 @@
+﻿@model IEnumerable<AGIMaster.Models.OrderProduct>
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+        <h2>Edit</h2>
+        <h3><b>Company Name</b>: @Model.FirstOrDefault().Order.Comapny <b>Status</b>: @Model.FirstOrDefault().Order.Pending</h3>
+        @Html.ActionLink("Back", "Orders", "Admin", null, new { @class = "btn btn-primary" })
+        <br /><br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+        <table id="orders" class="table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th width="40" >Id</th>
+                    <th>Name</th>
+                    <th>Specification</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-7" >
+        <h4><b>Original</b></h4>
+        <table id="original" class="table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th width="80">ID</th>
+                    <th width="150">Product Name</th>
+                    <th width="80">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.OrderBy(x => x.Product_Id))
+                {
+                    <tr id="@product.Product_Id">
+                        <td>@product.Product_Id</td>
+                        <td>@product.Product.Name</td>
+                        <td>@product.Quantity</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <h4><b>New Edit</b></h4>
+        <div id="form">
+            <table id="items" class="table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th width="80">ID</th>
+                        <th width="150">Product Name</th>
+                        <th width="80">Quantity</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.OrderBy(x => x.Product_Id))
+                    {
+                        <tr id="@product.Product_Id">
+                            <td>@product.Product_Id</td>
+                            <td>@product.Product.Name</td>
+                            <td><input class="ui-spinner-input" type="number" id="quantity@(product.Product_Id)" value="@product.Quantity" min="1" max="99" /></td>
+                            <td><span id="@product.Product_Id" class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" id="formSubmit" class="btn btn-primary ">Submit</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var inTable = new Array();
+    var dupFlag = false;
+    var totalPrice = 0.0;
+    var descriptions = new Array();
+    var initFlag = false;
+    $(document).on("ready", function () {
+        var product = "Test";
+        $.ajax({
+            url: "@Url.Action("getProducts", "Admin")",
+            type: "POST",
+            success: function (data) {
+
+                Display(data);
+            },
+            error: function (e) {
+                alert("ERROR");
+                console.log(e.error());
+                // debugger;
+            }
+        });
+         @foreach (var r in Model)
+        {
+            <text>
+                  inTable.push(@r.Product_Id);
+            </text>
+        }
+       // var newRow = "<tr id=\"EMPTY\"><td>" + product + "</td><td>" + product + "</td><td>" + product + "</td><td>" + product + "</td></tr>";
+       // $("table#orders tbody").append(newRow);
+        $("#orders tbody").on("click", "tr", function () {
+            if ($("#items tbody tr").attr("id") == "EMPTY") {
+                $("#items tbody").empty();
+                $("button#formSubmit").toggleClass("hidden");
+            }
+            var id = $(this).attr("id");
+            console.log(id);
+            if (inTable.length > 0) {
+                for (i = 0; i < inTable.length; i++) {
+                   // console.log("inTable: " + inTable[i] + " clicked: " + id);
+                    if (inTable[i] == id) {
+                       // console.log("in here");
+                        window.dupFlag = true;
+                    }
+                }
+            }
+            console.log(window.dupFlag);
+            if (window.dupFlag) {
+                var dup = $("table#items tr[ id=\"" + id + "\"]");
+                var value = parseInt($(dup).find("td input").val()) + 1;
+                $(dup).find("td input").attr("value", value);
+
+                totalPrice += parseFloat($(dup).data("price")) * value;
+                window.dupFlag = false;
+                //console.log(dupFlag);
+            } else {
+                inTable[inTable.length] = id;
+                // console.log("click");
+                var newRow = "<tr id=\"" + id + "\"><td>"+id+"</td><td>" + $(this).data("name") + "</td><td><input id='spinner' class=\"ui-spinner-input\" type=\"number\" value=\"1\" min=\"1\" max=\"99\"/></td><td><span id=\"" + id + "\" class=\"glyphicon glyphicon-trash\"></span></td></tr>";
+                // console.log(newRow);
+                $("table#items tbody").append(newRow);
+                totalPrice += parseFloat($(this).data("price")) * parseInt($(this).find("td input").val());
+
+            }
+            window.dupFlag = false;
+           // console.log(totalPrice);
+            $("span#price").text(totalPrice);
+
+        });
+        $("#form #items tbody").on("click", " tr td span", function () {
+            //console.log($(this).attr("id"));
+            var id = $(this).attr("id");
+            inTable.splice(inTable.indexOf(id), 1);
+            $(this).closest("tr").remove();
+            if (inTable.length == 0) {
+                $("#items").append("<tr id='EMPTY'><td>No Items in Cart</td><td>0</td><td>0</td><td>:(</td></tr>");
+            }
+           // $("#items tbody:empty").append("<tr id='EMPTY'><td>No Items in Cart</td><td>0</td><td>:(</td></tr>");
+            if ($("#items tbody tr").attr("id") == "EMPTY") {
+                $("#formSubmit").toggleClass("disabled");
+            }
+        });
+        $("div#form button#formSubmit").on("click", function () {
+            var products;
+            var quantities;
+            var counter = 0;
+            $("table#items > tbody > tr").each(function () {
+                if (counter == 0) {
+                    products = $(this).attr("id");
+                    quantities = $(this).find("input").attr("value");
+                }
+                else {
+                    products += "," + $(this).attr("id");
+                    quantities += "," + $(this).find("input").attr("value");
+                }
+                counter++;
+            });
+            // alert("Before aJax");
+            console.log("Products: " + products + "\nQuantities: " + quantities);
+            $.ajax({
+                url: "@Url.Action("CreateOrder", "Orders")",
+                type: "POST",
+                data: {
+                    products: products,
+                    quantities: quantities
+                },
+                success: function (data) {
+                    // alert("Submitted");
+                    window.location = "/Orders/Orders";
+                },
+                error: function (e) {
+                    alert("ERROR\nProducts: " + products + "\nQuantities: " + quantities);
+                    console.log(e.error());
+                    // debugger;
+                }
+            });
+            counter = 0;
+            products = "";
+            quantities = "";
+        });
+    });
+    function Display(obj) {
+        var output = '';
+        obj = JSON.parse(obj);
+        console.log(obj);
+        $("#orders tbody").empty();
+        if ($("#orders tbody tr").attr("id") == "EMPTY") {
+            $(this).empty();
+        }
+        for (var product in obj) {
+            var newRow = "<tr id='" + obj[product]["Id"] + "' data-name='" + obj[product]["Name"] + "'><td>" + obj[product]["Id"] + "</td><td>" + obj[product]["Name"] + "</td><td>" + obj[product]["Description"] + "</td></tr>";
+            $("table#orders tbody").append(newRow);
+            // output += product + ': ' + obj[property] + '\n ';
+        }
+        // console.log(output);
+    }
+</script>
