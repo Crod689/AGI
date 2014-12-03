@@ -15,28 +15,20 @@ namespace AGIMaster.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Product
+public partial class AdminOrder
 {
-
-    public Product()
-    {
-
-        this.OrderProducts = new HashSet<OrderProduct>();
-
-    }
-
 
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public int Order_Id { get; set; }
 
-    public string Description { get; set; }
-
-    public decimal Price { get; set; }
+    public int AdminOrder_Id { get; set; }
 
 
 
-    public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+    public virtual Order Order { get; set; }
+
+    public virtual Order Order1 { get; set; }
 
 }
 

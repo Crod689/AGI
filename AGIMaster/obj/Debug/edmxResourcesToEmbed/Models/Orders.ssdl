@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="UserTableModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminOrders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order_Id" Type="int" Nullable="false" />
+    <Property Name="AdminOrder_Id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="OrderProduct">
     <Key>
       <PropertyRef Name="Id" />
@@ -46,6 +54,30 @@
     <Property Name="CreationDate" Type="datetime" />
     <Property Name="Roles" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK__AdminOrde__Admin__76619304">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="AdminOrders" Type="Self.AdminOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdminOrders">
+        <PropertyRef Name="AdminOrder_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AdminOrde__Order__756D6ECB">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="AdminOrders" Type="Self.AdminOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdminOrders">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__OrderProd__Order__70DDC3D8">
     <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
     <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
@@ -71,10 +103,19 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="UserTableModel1StoreContainer">
+    <EntitySet Name="AdminOrders" EntityType="Self.AdminOrders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AdminOrde__Admin__76619304" Association="Self.FK__AdminOrde__Admin__76619304">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="AdminOrders" EntitySet="AdminOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AdminOrde__Order__756D6ECB" Association="Self.FK__AdminOrde__Order__756D6ECB">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="AdminOrders" EntitySet="AdminOrders" />
+    </AssociationSet>
     <AssociationSet Name="FK__OrderProd__Order__70DDC3D8" Association="Self.FK__OrderProd__Order__70DDC3D8">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />

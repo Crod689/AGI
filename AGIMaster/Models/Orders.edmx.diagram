@@ -11,6 +11,9 @@
         <EntityTypeShape EntityType="UserTableModel1.Table" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="UserTableModel1.FK__OrderProd__Order__4AB81AF0" ManuallyRouted="false" />
         <AssociationConnector Association="UserTableModel1.FK__OrderProd__Produ__4BAC3F29" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UserTableModel1.AdminOrder" Width="1.5" PointX="3" PointY="9.375" />
+        <AssociationConnector Association="UserTableModel1.FK__AdminOrde__Admin__76619304" />
+        <AssociationConnector Association="UserTableModel1.FK__AdminOrde__Order__756D6ECB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

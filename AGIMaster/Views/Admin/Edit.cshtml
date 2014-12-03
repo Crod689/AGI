@@ -17,16 +17,15 @@
         <table id="orders" class="table-striped table-bordered">
             <thead>
                 <tr>
-                    <th width="40" >Id</th>
+                    <th width="40">Id</th>
                     <th>Name</th>
                     <th>Specification</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
-    <div class="col-md-7" >
+    <div class="col-md-7">
         <h4><b>Original</b></h4>
         <table id="original" class="table-striped table-bordered">
             <thead>
@@ -75,6 +74,9 @@
             <button type="button" id="formSubmit" class="btn btn-primary ">Submit</button>
         </div>
     </div>
+    @{
+        int orderId = Model.FirstOrDefault().Order_Id;
+    }
 </div>
 <script type="text/javascript">
     var inTable = new Array();
@@ -82,6 +84,7 @@
     var totalPrice = 0.0;
     var descriptions = new Array();
     var initFlag = false;
+    var orderID = @orderId;
     $(document).on("ready", function () {
         var product = "Test";
         $.ajax({
@@ -97,14 +100,14 @@
                 // debugger;
             }
         });
-         @foreach (var r in Model)
+        @foreach (var r in Model)
         {
             <text>
-                  inTable.push(@r.Product_Id);
-            </text>
+        inTable.push(@r.Product_Id);
+        </text>
         }
-       // var newRow = "<tr id=\"EMPTY\"><td>" + product + "</td><td>" + product + "</td><td>" + product + "</td><td>" + product + "</td></tr>";
-       // $("table#orders tbody").append(newRow);
+        // var newRow = "<tr id=\"EMPTY\"><td>" + product + "</td><td>" + product + "</td><td>" + product + "</td><td>" + product + "</td></tr>";
+        // $("table#orders tbody").append(newRow);
         $("#orders tbody").on("click", "tr", function () {
             if ($("#items tbody tr").attr("id") == "EMPTY") {
                 $("#items tbody").empty();
@@ -114,9 +117,9 @@
             console.log(id);
             if (inTable.length > 0) {
                 for (i = 0; i < inTable.length; i++) {
-                   // console.log("inTable: " + inTable[i] + " clicked: " + id);
+                    // console.log("inTable: " + inTable[i] + " clicked: " + id);
                     if (inTable[i] == id) {
-                       // console.log("in here");
+                        // console.log("in here");
                         window.dupFlag = true;
                     }
                 }
@@ -140,7 +143,7 @@
 
             }
             window.dupFlag = false;
-           // console.log(totalPrice);
+            // console.log(totalPrice);
             $("span#price").text(totalPrice);
 
         });
@@ -152,7 +155,7 @@
             if (inTable.length == 0) {
                 $("#items").append("<tr id='EMPTY'><td>No Items in Cart</td><td>0</td><td>0</td><td>:(</td></tr>");
             }
-           // $("#items tbody:empty").append("<tr id='EMPTY'><td>No Items in Cart</td><td>0</td><td>:(</td></tr>");
+            // $("#items tbody:empty").append("<tr id='EMPTY'><td>No Items in Cart</td><td>0</td><td>:(</td></tr>");
             if ($("#items tbody tr").attr("id") == "EMPTY") {
                 $("#formSubmit").toggleClass("disabled");
             }
@@ -175,15 +178,16 @@
             // alert("Before aJax");
             console.log("Products: " + products + "\nQuantities: " + quantities);
             $.ajax({
-                url: "@Url.Action("CreateOrder", "Orders")",
+                url: "@Url.Action("UpdateOrder", "Admin")",
                 type: "POST",
                 data: {
+                    order:orderID,
                     products: products,
                     quantities: quantities
                 },
                 success: function (data) {
                     // alert("Submitted");
-                    window.location = "/Orders/Orders";
+                    window.location = "/Admin/Orders";
                 },
                 error: function (e) {
                     alert("ERROR\nProducts: " + products + "\nQuantities: " + quantities);

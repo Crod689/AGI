@@ -10,29 +10,52 @@ namespace AGIMaster.Controllers
 {
     public class OrdersController : Controller
     {
-        private UserTableEntities1 db = new UserTableEntities1(); 
+        private UserTableEntities1 db = new UserTableEntities1();
         //
         // GET: /Orders/
         [Authorize]
         public ActionResult Orders(AGIMaster.Models.OrderProduct u)
-        { 
+        {
             //return View();
 
             if (ModelState.IsValid)
             {
-                using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
+                // using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
+                // {
+                var company = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name).CompanyName;
+                if (company != null)
                 {
-                    var company = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name).CompanyName;
-                    if (company != null){
-                        IEnumerable listOfNames = db.Orders.Where(x => x.Comapny == company).ToList();
-                        return View(listOfNames);
-                    }
-                    else
+                    // IEnumerable listOfNames = db.Orders.Where(x => x.Comapny == company).ToList();
+                    var listOfNames = db.Orders.Where(x => x.Comapny == company).ToList();
+                    List<Order> tempList = new List<Order>();
+                    foreach (var temp in listOfNames)
                     {
-                        return View();
+                        var orderTemp = db.AdminOrders.FirstOrDefault(x => x.Order_Id == temp.Id);
+                        if (orderTemp != null)
+                        {
+                            var order1 = db.Orders.FirstOrDefault(x => x.Id == orderTemp.AdminOrder_Id);
+                            if (order1 != null)
+                            {
+                                tempList.Add((Order)order1);
+
+                            }
+
+                        }
+
                     }
-                    
+                    if (tempList != null)
+                    {
+                        listOfNames.AddRange(tempList);
+                    }
+
+                    return View(listOfNames);
                 }
+                else
+                {
+                    return View();
+                }
+
+                // }
             }
             return View();
         }
@@ -55,7 +78,7 @@ namespace AGIMaster.Controllers
         public void CreateOrder(string products, string quantities)
         {
             using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
-            {   
+            {
                 var company = db.Tables.FirstOrDefault(x => x.Username == User.Identity.Name).CompanyName;
                 var newOrder = new Order { Comapny = company, Pending = "Pending" };
                 var productArray = products.Split(',');
@@ -74,15 +97,15 @@ namespace AGIMaster.Controllers
         {
             //using (Models.UserTableEntities1 db = new Models.UserTableEntities1())
             //{
-                var list = db.OrderProducts.Where(x => x.Order_Id == id).ToList();
-                Dictionary<string, int> map=new Dictionary<string,int>();
-                foreach (var item in list)
-                {
-                    map.Add(item.Product.Name, item.Quantity);
-                }
-                return Json(map,JsonRequestBehavior.AllowGet);
-           // }
+            var list = db.OrderProducts.Where(x => x.Order_Id == id).ToList();
+            Dictionary<string, int> map = new Dictionary<string, int>();
+            foreach (var item in list)
+            {
+                map.Add(item.Product.Name, item.Quantity);
+            }
+            return Json(map, JsonRequestBehavior.AllowGet);
+            // }
         }
-     
+
     }
 }

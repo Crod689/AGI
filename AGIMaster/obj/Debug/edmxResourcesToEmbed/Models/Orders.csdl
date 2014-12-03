@@ -20,6 +20,8 @@
     <Property Name="Pending" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Order__4AB81AF0" FromRole="Orders" ToRole="OrderProduct" />
     <Property Name="DateCreated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+    <NavigationProperty Name="AdminOrders" Relationship="UserTableModel1.FK__AdminOrde__Admin__76619304" FromRole="Order" ToRole="AdminOrder" />
+    <NavigationProperty Name="AdminOrders1" Relationship="UserTableModel1.FK__AdminOrde__Order__756D6ECB" FromRole="Order" ToRole="AdminOrder" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -87,5 +89,48 @@
       <End Role="Products" EntitySet="Products" />
       <End Role="OrderProduct" EntitySet="OrderProducts" />
     </AssociationSet>
+    <EntitySet Name="AdminOrders" EntityType="UserTableModel1.AdminOrder" />
+    <AssociationSet Name="FK__AdminOrde__Admin__76619304" Association="UserTableModel1.FK__AdminOrde__Admin__76619304">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="AdminOrder" EntitySet="AdminOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AdminOrde__Order__756D6ECB" Association="UserTableModel1.FK__AdminOrde__Order__756D6ECB">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="AdminOrder" EntitySet="AdminOrders" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="AdminOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_Id" Type="Int32" Nullable="false" />
+    <Property Name="AdminOrder_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="UserTableModel1.FK__AdminOrde__Admin__76619304" FromRole="AdminOrder" ToRole="Order" />
+    <NavigationProperty Name="Order1" Relationship="UserTableModel1.FK__AdminOrde__Order__756D6ECB" FromRole="AdminOrder" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK__AdminOrde__Admin__76619304">
+    <End Type="UserTableModel1.Order" Role="Order" Multiplicity="1" />
+    <End Type="UserTableModel1.AdminOrder" Role="AdminOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdminOrder">
+        <PropertyRef Name="AdminOrder_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AdminOrde__Order__756D6ECB">
+    <End Type="UserTableModel1.Order" Role="Order" Multiplicity="1" />
+    <End Type="UserTableModel1.AdminOrder" Role="AdminOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdminOrder">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

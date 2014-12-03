@@ -193,6 +193,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminOrder.cs">
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
